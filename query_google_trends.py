@@ -2,17 +2,21 @@ import pyecharts
 import pyecharts.options as opts
 from pytrends.request import TrendReq
 
+# Query Google Trends for interested keywords.
 pytrend = TrendReq()
 project_list = ['Apache Hadoop', 'Apache Hive', 'Apache Spark', 'Apache Hbase',
         'Apache Flink']
 
+# Query for data of the last 30 days.
 pytrend.build_payload(kw_list=project_list, cat=0, timeframe='today 1-m', geo='', gprop='')
-
 df = pytrend.interest_over_time()
+
+# Perform normalization to the data.
 df = df.drop(['isPartial'], axis=1)
 df = df.div(df.max(axis=1), axis=0)
 df = df * 100
 
+# Draw chart using pyecharts.
 line = pyecharts.charts.Line(init_opts=opts.InitOpts(width='1100px'))
 xaxis = [i.strftime("%b-%d-%Y") for i in df[project_list[0]].keys()]
 line.add_xaxis(xaxis)
