@@ -26,11 +26,10 @@ for project in project_list:
     line.add_yaxis(project, yaxis, is_smooth=True,
             linestyle_opts=opts.LineStyleOpts(width=2), label_opts=opts.LabelOpts(is_show=False),
             symbol_size=8)
+
 line.set_global_opts(title_opts=opts.TitleOpts(
         title="Normalized Google trends for famous OpenSource BigData prjects over last 30 days"),
         tooltip_opts=opts.TooltipOpts(trigger='axis'),
-        axispointer_opts=opts.AxisPointerOpts(
-            is_show=True, link=[{"xAxisIndex": "all"}]),
         legend_opts=opts.LegendOpts(pos_left='right', pos_top='middle',  orient="vertical"),
     )
 
